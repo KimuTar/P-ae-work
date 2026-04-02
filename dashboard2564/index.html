@@ -1,0 +1,264 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+  .header { padding: 20px 24px 12px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .header-top { display: flex; align-items: flex-start; justify-content: space-between; }
+  .uni-badge { font-size: 11px; color: var(--color-text-secondary); background: var(--color-background-secondary); padding: 3px 10px; border-radius: 20px; border: 0.5px solid var(--color-border-tertiary); }
+  .title { font-size: 17px; font-weight: 500; color: var(--color-text-primary); margin-top: 6px; }
+  .subtitle { font-size: 12px; color: var(--color-text-secondary); margin-top: 3px; }
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 16px 24px; }
+  .kpi { background: var(--color-background-secondary); border-radius: 10px; padding: 12px 14px; }
+  .kpi-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; }
+  .kpi-value { font-size: 22px; font-weight: 500; color: var(--color-text-primary); line-height: 1; }
+  .kpi-sub { font-size: 11px; color: var(--color-text-tertiary); margin-top: 3px; }
+  .kpi-value.accent { color: #185FA5; }
+  .kpi-value.green { color: #3B6D11; }
+  .kpi-value.warn { color: #854F0B; }
+  .body { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 0 24px 20px; }
+  .panel { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 10px; padding: 14px 16px; }
+  .panel-title { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); letter-spacing: .03em; margin-bottom: 12px; text-transform: uppercase; }
+  .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }
+  .bar-label { font-size: 11.5px; color: var(--color-text-primary); width: 110px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar-wrap { flex: 1; background: var(--color-background-secondary); border-radius: 4px; height: 10px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; transition: width .6s ease; }
+  .bar-pct { font-size: 11px; color: var(--color-text-secondary); width: 32px; text-align: right; flex-shrink: 0; }
+  .bar-count { font-size: 11px; color: var(--color-text-tertiary); width: 28px; text-align: right; flex-shrink: 0; }
+  .table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .table th { font-weight: 500; color: var(--color-text-secondary); text-align: left; padding: 4px 6px; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 11px; }
+  .table th.r, .table td.r { text-align: right; }
+  .table td { padding: 5px 6px; color: var(--color-text-primary); border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .table tr:last-child td { border-bottom: none; }
+  .table tr.grp td { background: var(--color-background-secondary); font-weight: 500; font-size: 11px; color: var(--color-text-secondary); }
+  .pill { display: inline-block; padding: 2px 7px; border-radius: 10px; font-size: 10px; font-weight: 500; }
+  .pill-green { background: #EAF3DE; color: #3B6D11; }
+  .pill-gray  { background: var(--color-background-secondary); color: var(--color-text-secondary); }
+  .pill-amber { background: #FAEEDA; color: #854F0B; }
+  .full { grid-column: 1 / -1; }
+  .insight-row { display: flex; gap: 10px; padding: 0 24px 16px; }
+  .insight { flex: 1; background: var(--color-background-secondary); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: var(--color-text-secondary); border-left: 3px solid; }
+  .insight strong { display: block; font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+  .insight.blue { border-color: #378ADD; }
+  .insight.amber { border-color: #BA7517; }
+  .insight.green { border-color: #639922; }
+  .footer { padding: 8px 24px 16px; font-size: 10.5px; color: var(--color-text-tertiary); }
+</style>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="title">จำนวนผู้สำเร็จการศึกษาตามระยะเวลาของหลักสูตร</div>
+      <div class="subtitle">มหาวิทยาลัยแม่ฟ้าหลวง · ระดับปริญญาโท · ปีที่เข้าศึกษา 2564</div>
+    </div>
+    <span class="uni-badge">ข้อมูล ณ 30 มี.ค. 2569</span>
+  </div>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi">
+    <div class="kpi-label">รับเข้าศึกษาทั้งหมด</div>
+    <div class="kpi-value">248</div>
+    <div class="kpi-sub">คน / 10 สำนักวิชา</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">สำเร็จการศึกษาทั้งหมด</div>
+    <div class="kpi-value accent">158</div>
+    <div class="kpi-sub">คิดเป็น 63.7%</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">สำเร็จตามหลักสูตร</div>
+    <div class="kpi-value green">16</div>
+    <div class="kpi-sub">คิดเป็น 6.45%</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">ยังไม่สำเร็จ / ออก</div>
+    <div class="kpi-value warn">90</div>
+    <div class="kpi-sub">คิดเป็น 36.3%</div>
+  </div>
+</div>
+
+<div class="insight-row">
+  <div class="insight blue">
+    <strong>สาขาที่มีอัตราสำเร็จตามหลักสูตรสูงสุด</strong>
+    นวัตกรรมวิทยาศาสตร์เครื่องสำอางเชิงสร้างสรรค์ — 50.00%
+  </div>
+  <div class="insight green">
+    <strong>สำนักวิชาที่สำเร็จตามหลักสูตรมากที่สุด</strong>
+    เวชศาสตร์ชะลอวัยและฟื้นฟูสุขภาพ — 12 คน (16.22%)
+  </div>
+  <div class="insight amber">
+    <strong>8 ใน 10 สำนักวิชา</strong>
+    ไม่มีผู้สำเร็จการศึกษาตามระยะเวลาของหลักสูตร (0%)
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- Bar chart: graduation rate by school -->
+  <div class="panel">
+    <div class="panel-title">อัตราสำเร็จตามหลักสูตร (%) จำแนกตามสำนักวิชา</div>
+    <!-- เวชศาสตร์ชะลอวัยฯ 16.22 -->
+    <div class="bar-row">
+      <div class="bar-label" title="เวชศาสตร์ชะลอวัยฯ">เวชศาสตร์ชะลอวัยฯ</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#185FA5"></div></div>
+      <div class="bar-pct">16.22%</div>
+    </div>
+    <!-- วิทยาศาสตร์เครื่องสำอาง 8.89 -->
+    <div class="bar-row">
+      <div class="bar-label" title="วิทยาศาสตร์เครื่องสำอาง">วิทย์เครื่องสำอาง</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:54.8%;background:#378ADD"></div></div>
+      <div class="bar-pct">8.89%</div>
+    </div>
+    <!-- ศิลปศาสตร์ 0 -->
+    <div class="bar-row">
+      <div class="bar-label">ศิลปศาสตร์</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:0%;background:#B4B2A9"></div></div>
+      <div class="bar-pct" style="color:var(--color-text-tertiary)">—</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">วิทยาศาสตร์</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:0%;background:#B4B2A9"></div></div>
+      <div class="bar-pct" style="color:var(--color-text-tertiary)">—</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">การจัดการ</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:0%;background:#B4B2A9"></div></div>
+      <div class="bar-pct" style="color:var(--color-text-tertiary)">—</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">เทคโนโลยีดิจิทัลฯ</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:0%;background:#B4B2A9"></div></div>
+      <div class="bar-pct" style="color:var(--color-text-tertiary)">—</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">อุตสาหกรรมเกษตร</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:0%;background:#B4B2A9"></div></div>
+      <div class="bar-pct" style="color:var(--color-text-tertiary)">—</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">นิติศาสตร์</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:0%;background:#B4B2A9"></div></div>
+      <div class="bar-pct" style="color:var(--color-text-tertiary)">—</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">วิทยาศาสตร์สุขภาพ</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:0%;background:#B4B2A9"></div></div>
+      <div class="bar-pct" style="color:var(--color-text-tertiary)">—</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">นวัตกรรมสังคม</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width:0%;background:#B4B2A9"></div></div>
+      <div class="bar-pct" style="color:var(--color-text-tertiary)">—</div>
+    </div>
+  </div>
+
+  <!-- Donut summary -->
+  <div class="panel" style="display:flex;flex-direction:column;justify-content:space-between;">
+    <div class="panel-title">ภาพรวมผู้รับเข้า 248 คน</div>
+    <div style="display:flex;justify-content:center;align-items:center;flex:1;padding:8px 0">
+      <svg width="170" height="170" viewBox="0 0 170 170">
+        <!-- bg circle -->
+        <circle cx="85" cy="85" r="62" fill="none" stroke="var(--color-background-secondary)" stroke-width="22"/>
+        <!-- not graduated: 90/248 = 36.3% of 390 = 141.6 deg -->
+        <circle cx="85" cy="85" r="62" fill="none" stroke="#D3D1C7" stroke-width="22"
+          stroke-dasharray="78 312" stroke-dashoffset="0" stroke-linecap="butt"
+          transform="rotate(-90 85 85)"/>
+        <!-- graduated not on time: 142/248 = 57.3% of 390 = 223.2 -->
+        <circle cx="85" cy="85" r="62" fill="none" stroke="#85B7EB" stroke-width="22"
+          stroke-dasharray="221 169" stroke-dashoffset="-78" stroke-linecap="butt"
+          transform="rotate(-90 85 85)"/>
+        <!-- on time: 16/248 = 6.45% of 390 = 25.2 -->
+        <circle cx="85" cy="85" r="62" fill="none" stroke="#185FA5" stroke-width="22"
+          stroke-dasharray="25 365" stroke-dashoffset="-299" stroke-linecap="butt"
+          transform="rotate(-90 85 85)"/>
+        <text x="85" y="80" text-anchor="middle" font-size="22" font-weight="500" fill="var(--color-text-primary)">248</text>
+        <text x="85" y="97" text-anchor="middle" font-size="11" fill="var(--color-text-secondary)">นักศึกษา</text>
+      </svg>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:7px;font-size:12px;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="width:11px;height:11px;border-radius:2px;background:#185FA5;flex-shrink:0"></span>
+        <span style="color:var(--color-text-primary)">สำเร็จตามหลักสูตร</span>
+        <span style="margin-left:auto;font-weight:500;color:var(--color-text-primary)">16 คน (6.45%)</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="width:11px;height:11px;border-radius:2px;background:#85B7EB;flex-shrink:0"></span>
+        <span style="color:var(--color-text-primary)">สำเร็จแต่ไม่ตรงเวลา</span>
+        <span style="margin-left:auto;font-weight:500;color:var(--color-text-primary)">142 คน (57.3%)</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="width:11px;height:11px;border-radius:2px;background:#D3D1C7;flex-shrink:0"></span>
+        <span style="color:var(--color-text-primary)">ยังไม่สำเร็จ / ออก</span>
+        <span style="margin-left:auto;font-weight:500;color:var(--color-text-primary)">90 คน (36.3%)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail table full width -->
+  <div class="panel full">
+    <div class="panel-title">รายละเอียดจำแนกตามสำนักวิชาและสาขาวิชา</div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>สาขาวิชา</th>
+          <th class="r">รับเข้า</th>
+          <th class="r">สำเร็จ (ทั้งหมด)</th>
+          <th class="r">สำเร็จตามหลักสูตร</th>
+          <th class="r">ร้อยละ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="grp"><td colspan="5">ศิลปศาสตร์</td></tr>
+        <tr><td>ภาษาอังกฤษเพื่อการพัฒนาวิชาชีพ</td><td class="r">4</td><td class="r">1</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+        
+        <tr class="grp"><td colspan="5">วิทยาศาสตร์</td></tr>
+        <tr><td>เคมีประยุกต์</td><td class="r">4</td><td class="r">2</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+        <tr><td>วิทยาศาสตร์ชีวภาพ</td><td class="r">1</td><td class="r">—</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+        <tr><td>วิทยาการเชิงคำนวณและข้อมูล</td><td class="r">2</td><td class="r">—</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+        <tr><td>นวัตกรรมวัสดุ</td><td class="r">3</td><td class="r">—</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+
+        <tr class="grp"><td colspan="5">การจัดการ</td></tr>
+        <tr><td>บริหารธุรกิจ</td><td class="r">25</td><td class="r">22</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+        <tr><td>การจัดการโลจิสติกส์ฯ</td><td class="r">17</td><td class="r">9</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+
+        <tr class="grp"><td colspan="5">เทคโนโลยีดิจิทัลประยุกต์</td></tr>
+        <tr><td>เทคโนโลยีสารสนเทศ</td><td class="r">7</td><td class="r">4</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+        <tr><td>วิศวกรรมคอมพิวเตอร์</td><td class="r">14</td><td class="r">12</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+
+        <tr class="grp"><td colspan="5">อุตสาหกรรมเกษตร</td></tr>
+        <tr><td>วิทยาศาสตร์และเทคโนโลยีการอาหาร</td><td class="r">6</td><td class="r">3</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+        <tr><td>เทคโนโลยีและนวัตกรรมหลังการเก็บเกี่ยว</td><td class="r">6</td><td class="r">5</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+
+        <tr class="grp"><td colspan="5">นิติศาสตร์</td></tr>
+        <tr><td>นิติศาสตร์</td><td class="r">12</td><td class="r">7</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+
+        <tr class="grp"><td colspan="5">วิทยาศาสตร์เครื่องสำอาง</td></tr>
+        <tr><td>วิทยาศาสตร์เครื่องสำอาง</td><td class="r">43</td><td class="r">27</td><td class="r">3</td><td class="r"><span class="pill pill-amber">6.98%</span></td></tr>
+        <tr><td>นวัตกรรมวิทย์เครื่องสำอางเชิงสร้างสรรค์</td><td class="r">2</td><td class="r">2</td><td class="r">1</td><td class="r"><span class="pill pill-green">50.00%</span></td></tr>
+
+        <tr class="grp"><td colspan="5">วิทยาศาสตร์สุขภาพ</td></tr>
+        <tr><td>การจัดการสุขภาพชายแดน</td><td class="r">17</td><td class="r">8</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+        <tr><td>วิทยาการวิเคราะห์ทางสุขภาพและชีวการแพทย์</td><td class="r">8</td><td class="r">3</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+
+        <tr class="grp"><td colspan="5">เวชศาสตร์ชะลอวัยและฟื้นฟูสุขภาพ</td></tr>
+        <tr><td>ตจวิทยา</td><td class="r">37</td><td class="r">35</td><td class="r">12</td><td class="r"><span class="pill pill-green">32.43%</span></td></tr>
+        <tr><td>เวชศาสตร์ชะลอวัยและฟื้นฟูสุขภาพ</td><td class="r">15</td><td class="r">5</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+        <tr><td>วิทยาศาสตร์ชะลอวัยและฟื้นฟูสุขภาพ</td><td class="r">22</td><td class="r">10</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+
+        <tr class="grp"><td colspan="5">นวัตกรรมสังคม</td></tr>
+        <tr><td>การพัฒนาระหว่างประเทศ</td><td class="r">3</td><td class="r">3</td><td class="r">—</td><td class="r"><span class="pill pill-gray">—</span></td></tr>
+
+        <tr style="background:var(--color-background-secondary)">
+          <td style="font-weight:500">รวมทั้งสิ้น</td>
+          <td class="r" style="font-weight:500">248</td>
+          <td class="r" style="font-weight:500">158</td>
+          <td class="r" style="font-weight:500">16</td>
+          <td class="r"><span class="pill pill-amber">6.45%</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="footer">REG.STAT_07-08 · มหาวิทยาลัยแม่ฟ้าหลวง · ข้อมูล ณ วันที่ 30 มีนาคม 2569</div>
